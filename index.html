@@ -1,1 +1,201 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moshauzan</title>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#000;display:flex;justify-content:center}
+.app{width:100%;max-width:430px;background:#0a2214;min-height:100vh;border:2px solid #c9a86a;color:#fff}
+.head{text-align:center;padding:12px;border-bottom:2px solid #c9a86a;color:#ffe9a8}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;padding:8px}
+.card{background:#143d27;border:1px solid #c9a86a;border-radius:8px;padding:6px;text-align:center}
+.card h2{color:#ffe9a8;font-size:11px}
+.net{background:#e6c87a;color:#000;text-align:center;padding:8px;margin:0 8px;border-radius:8px;font-weight:800;font-size:11px}
+.section{margin:8px;border:1px solid #2d5a3d;border-radius:10px;background:#102f1f;overflow:hidden}
+.sum{padding:10px;font-weight:800;color:#ffe9a8;cursor:pointer;display:flex;justify-content:space-between;background:#143d27;list-style:none;font-size:12px}
+.m{padding:6px 8px;border-bottom:1px solid #1a3d26;font-size:10.5px}
+.row{display:flex;justify-content:space-between;align-items:center}
+.paid{background:#a5d6a7;color:#000;border:none;padding:3px 6px;border-radius:8px;font-size:9px}
+.due{background:#ffccbc;color:#000;border:none;padding:3px 6px;border-radius:8px;font-size:9px}
+.adv{background:#ffe082;color:#000;border:none;padding:2px 5px;border-radius:5px;font-size:8px;margin-left:2px}
+.bati{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:5px}
+.bal{font-size:9px;color:#ffe9a8;background:#00000055;padding:2px 5px;border-radius:10px;margin-left:6px}
+.sms{font-size:8px;background:#25D366;color:#000;border:none;padding:2px 5px;border-radius:4px;margin-left:2px}
+.inp{width:100%;padding:6px;border-radius:5px;border:1px solid #2d5a3d;background:#0a2214;color:#fff;margin-bottom:5px;font-size:11px}
+.btn{width:100%;padding:7px;border:none;border-radius:6px;font-weight:800;font-size:11px;cursor:pointer}
+.btnR{background:#c62828;color:#fff}.btnG{background:#2e7d32;color:#fff}.btnY{background:#e6c87a;color:#000}
+.list{padding:6px;font-size:11px;border-bottom:1px solid #1a3d26;display:flex;justify-content:space-between}
+.contact{text-align:center;padding:12px;border:1px solid #c9a86a;border-radius:10px;margin:8px;background:#102f1f;font-size:11px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="head"><b>🌳 Moshauzan Islami Jubo Songgo</b><br>Nagarkanda, Faridpur</div>
 
+<div class="cards">
+<div class="card"><small>সদস্য আয়</small><h2 id="mInc">৳0</h2></div>
+<div class="card"><small>অন্যান্য আয়</small><h2 id="oInc">৳0</h2></div>
+<div class="card"><small>মোট ব্যয়</small><h2 id="exp">৳0</h2></div>
+</div>
+<div class="cards">
+<div class="card"><small>ব্যাংক ইন্টারেস্ট</small><h2 id="int">৳0</h2></div>
+<div class="card"><small>মোট আয়</small><h2 id="tInc">৳0</h2></div>
+<div class="card"><small>ব্যাংক ব্যালেন্স</small><h2 id="bank">৳0</h2></div>
+</div>
+
+<div class="net" id="net"></div>
+
+<details class="section" open>
+<summary class="sum"><span>👥 সদস্য তালিকা</span><span>▼</span></summary>
+<div style="padding:6px">
+<select id="mon" onchange="render()" style="width:100%;padding:6px;border-radius:5px"></select>
+<div id="boxM" style="margin-top:6px"></div>
+<div style="display:flex;gap:4px;margin-top:8px">
+<input id="newName" placeholder="নতুন সদস্যের নাম" class="inp" style="flex:1"><input id="newMob" placeholder="মোবাইল" class="inp" style="flex:1">
+</div>
+<button class="btn btnG" onclick="addMember()">+ নতুন সদস্য যোগ করুন</button>
+</div>
+</details>
+
+<details class="section" style="border-color:#c9a86a">
+<summary class="sum"><span>💰 বিশেষ জমা</span><span>▼</span></summary>
+<div style="padding:8px">
+<select id="extraMember" class="inp"></select>
+<input id="extraDate" type="date" class="inp">
+<input id="extraAmt" type="number" placeholder="টাকা" class="inp">
+<button class="btn btnY" onclick="addExtra()">+ জমা করুন + SMS</button>
+<div id="extraList"></div>
+</div>
+</details>
+
+<details class="section"><summary class="sum"><span>➕ অন্যান্য আয়</span><span>▼</span></summary><div style="padding:8px"><input id="oDate" type="date" class="inp"><input id="oSrc" placeholder="উৎস" class="inp"><input id="oAmt" type="number" placeholder="টাকা" class="inp"><button class="btn btnY" onclick="addOther()">+ আয় যোগ</button><div id="oList"></div></div></details>
+<details class="section"><summary class="sum"><span>💸 ব্যয়</span><span>▼</span></summary><div style="padding:8px"><input id="kDate" type="date" class="inp"><input id="kDesc" placeholder="বিবরণ" class="inp"><input id="kAmt" type="number" placeholder="টাকা" class="inp"><button class="btn btnR" onclick="addKhoroch()">+ ব্যয় যোগ</button><div id="kList"></div></div></details>
+<details class="section"><summary class="sum"><span>🏦 ব্যাংক</span><span>▼</span></summary><div style="padding:8px"><input id="startBank" type="number" placeholder="শুরুর ব্যাংক" class="inp"><input id="intAmt" type="number" placeholder="ইন্টারেস্ট" class="inp"><div style="display:flex;gap:4px"><button class="btn btnY" style="flex:1" onclick="setBank()">ব্যাংক সেট</button><button class="btn btnG" style="flex:1" onclick="addInterest()">+ ইন্টারেস্ট</button></div><button class="btn btnR" style="margin-top:6px" onclick="resetAll()">🗑️ সব জিরো করুন</button></div></details>
+
+<div class="contact"><b>Masud Khan - 01723-339065</b><br><a href="tel:01723339065" style="background:#e6c87a;color:#000;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:800;display:inline-block;margin-top:6px">📞 Call করুন</a></div>
+</div>
+
+<script>
+let PASSWORD = "Masud123";
+let isAdmin = false;
+function checkAdmin(){
+  if(isAdmin) return true;
+  let p = prompt("পাসওয়ার্ড দিন:");
+  if(p === PASSWORD){ isAdmin = true; return true; }
+  else { alert("ভুল পাসওয়ার্ড!"); return false; }
+}
+const firebaseConfig = {
+  apiKey: "AIzaSyAFZ85PVL7HkOswBIVUTJaIAFkWNsnMRAE",
+  authDomain: "moshauzan-islami-jubo-songgo.firebaseapp.com",
+  databaseURL: "https://moshauzan-islami-jubo-songgo-default-rtdb.firebaseio.com",
+  projectId: "moshauzan-islami-jubo-songgo",
+  storageBucket: "moshauzan-islami-jubo-songgo.firebasestorage.app",
+  messagingSenderId: "1084297064431",
+  appId: "1:1084297064431:web:f0b9aff31f23493f9d501a"
+};
+firebase.initializeApp(firebaseConfig);
+const dbRef = firebase.database().ref("moshauzan_v2");
+function toArr(x){ if(!x) return []; if(Array.isArray(x)) return x; return Object.values(x); }
+let defaultMems=[[1,"Md. Mizanur Rahaman","01717694988"],[2,"Md. Monirul Islam","01725667226"],[3,"Md. Faidul islam","01727870526"],[4,"Md. Masowd Khan","01723339065"],[5,"Md. Giash patoary","01914111888"],[6,"Md. Abu Said khan","01714822718"],[7,"Md. Sohrab Hossen","01718738605"],[8,"Md. Chunnu Miah","01855695697"],[9,"Md. Shakhawat Khan","01920655998"],[10,"Md. Mahmud Khan","01918686300"],[11,"Md. Usman Sheikh","01866241726"],[12,"Md. Shorif Munshi","01824158126"],[13,"Md. Delower hossain","01628288720"],[14,"Md. Rajibul Islam","01766287552"],[15,"Md. Mamun Hawlader","01740007828"],[16,"Md. Palash Khan","01612035899"]];
+let D=JSON.parse(localStorage.getItem("MOSH_ZERO_V1")||"null");if(!D){D={pay:{},other:[],khoroch:[],bankStart:0,interest:0,members:defaultMems,extra:[]};}if(!D.extra)D.extra=[];
+let firebaseLoaded=false;
+function save(){localStorage.setItem("MOSH_ZERO_V1",JSON.stringify(D)); if(firebaseLoaded){ dbRef.set(D); } }
+dbRef.on("value",(snap)=>{
+  let v=snap.val();
+  if(v){
+    D=v;
+    D.members=toArr(v.members);
+    D.other=toArr(v.other);
+    D.khoroch=toArr(v.khoroch);
+    D.extra=toArr(v.extra);
+    if(!D.pay) D.pay={};
+    if(!D.members || D.members.length==0) D.members=defaultMems;
+    if(D.members[0] && !Array.isArray(D.members[0])){ D.members = D.members.map(m=>Object.values(m)); }
+    if(!D.extra) D.extra=[];
+  } else {
+    dbRef.set(D);
+  }
+  firebaseLoaded=true;
+  if(!window._genDone){ genMonths(); window._genDone=true; }
+  render();
+});
+function genMonths(){let s=document.getElementById("mon");let months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];let html="";for(let y=2020;y<=2120;y++){for(let m=0;m<12;m++){html+=`<option>${months[m]} ${y}</option>`;}}s.innerHTML=html;s.value="Oct 2026";document.getElementById("kDate").valueAsDate=new Date();document.getElementById("oDate").valueAsDate=new Date();document.getElementById("extraDate").valueAsDate=new Date();document.getElementById("startBank").value=D.bankStart;}
+function getAdvanceInfo(id){let months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];function toNum(s){let [mm,yy]=s.split(" ");return parseInt(yy)*12+months.indexOf(mm);}let keys=Object.keys(D.pay).filter(k=>k.startsWith(id+"_")).map(k=>{let datePart=k.split("_").slice(1).join("_");return {key:datePart,num:toNum(datePart)};}).sort((a,b)=>b.num-a.num);if(keys.length==0)return null;return keys[0].key;}
+function getBal(id){let f=Object.keys(D.pay).filter(k=>k.startsWith(id+"_")).length*2000;let e=D.extra.filter(x=>x.id==id).reduce((s,x)=>s+x.amt,0);return f+e;}
+function sendSMS(mobile, message){
+  if(confirm(mobile+" নম্বরে SMS পাঠাবেন?\n\n"+message)){
+    window.location.href=`sms:${mobile}?body=${encodeURIComponent(message)}`;
+  }
+}
+function render(){let m=document.getElementById("mon").value;let h="";let pc=0;D.members.forEach(([id,name,mob],idx)=>{let k=id+"_"+m;let paid=!!D.pay[k];if(paid)pc++;let batiColor=paid?"#00e676":"#ff1744";let batiShadow=paid?"0 0 8px #00e676":"0 0 8px #ff1744";let bal=getBal(id);let advInfo=getAdvanceInfo(id);let advBadge="";if(advInfo&&advInfo!==m){let months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];function toNum(s){let [mm,yy]=s.split(" ");return parseInt(yy)*12+months.indexOf(mm);}if(toNum(advInfo)>toNum(m)){advBadge=`<div style="color:#ffe082;font-size:9px;margin-top:2px">▶ ${advInfo} পর্যন্ত</div>`;}}h+=`<div class="m"><div class="row"><span><span class="bati" style="background:${batiColor};box-shadow:${batiShadow}"></span>${id}. ${name} <span class="bal">৳${bal.toLocaleString()}</span></span><span><button class="${paid?'paid':'due'}" onclick="tog(${id})">${paid?'Paid':'Due'}</button><button class="adv" onclick="advPay(${id})">অগ্রিম</button><button class="sms" onclick="manualSMS(${id})">SMS</button></span></div><div style="margin-top:2px"><a href="tel:${mob}" style="color:#ffe9a8;text-decoration:none;font-size:9px">📞 ${mob}</a>${advBadge}</div></div>`;});document.getElementById("boxM").innerHTML=h;let sel=document.getElementById("extraMember");sel.innerHTML=D.members.map(([id,name])=>`<option value="${id}">${id}. ${name}</option>`).join("");let totalFixed=Object.keys(D.pay).length*2000;let totalExtra=D.extra.reduce((a,b)=>a+b.amt,0);let totalMemberIncome=totalFixed+totalExtra;let totalOther=D.other.reduce((a,b)=>a+b.amt,0);let totalExp=D.khoroch.reduce((a,b)=>a+b.amt,0);let totalIncome=totalMemberIncome+totalOther;let currentBank=D.bankStart+totalIncome-totalExp+D.interest;document.getElementById("mInc").innerText="৳"+totalMemberIncome.toLocaleString();document.getElementById("oInc").innerText="৳"+totalOther.toLocaleString();document.getElementById("tInc").innerText="৳"+totalIncome.toLocaleString();document.getElementById("exp").innerText="৳"+totalExp.toLocaleString();document.getElementById("int").innerText="৳"+D.interest.toLocaleString();document.getElementById("bank").innerText="৳"+currentBank.toLocaleString();document.getElementById("net").innerHTML=`${m}: 🟢 ${pc} | 🔴 ${D.members.length-pc} | ব্যাংক: ৳${currentBank}`;renderLists();}
+function manualSMS(id){
+  let mem=D.members.find(x=>x[0]==id);
+  if(!mem) return;
+  let bal=getBal(id);
+  let msg=`Assalamu Alaikum ${mem[1]}, Apnar Moshauzan er mot joma: ${bal} Taka. Dhonnobad - Masud Khan`;
+  sendSMS(mem[2], msg);
+}
+function tog(id){
+  if(!checkAdmin()) return;
+  let m=document.getElementById("mon").value;
+  let k=id+"_"+m;
+  let mem=D.members.find(x=>x[0]==id);
+  if(D.pay[k]){
+    if(!confirm("বাতিল করবেন?")) return;
+    delete D.pay[k];
+  } else {
+    D.pay[k]=1;
+    let bal=getBal(id);
+    let msg=`Assalamu Alaikum ${mem[1]}, Apnar ${m} masher 2000 Taka joma hoyeche. Mot joma: ${bal} Taka. - Moshauzan Songgo`;
+    save(); render();
+    setTimeout(()=>sendSMS(mem[2], msg), 300);
+    return;
+  }
+  save(); render();
+}
+function advPay(id){
+  if(!checkAdmin()) return;
+  let months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function toNum(s){let [mm,yy]=s.split(" ");return parseInt(yy)*12+months.indexOf(mm);}
+  function fromNum(n){let y=Math.floor(n/12),m=n%12;return `${months[m]} ${y}`;}
+  let start=document.getElementById("mon").value;let sNum=toNum(start);
+  let input=prompt(`অগ্রিম কত মাস পর্যন্ত দিবে?\nশুরু: ${start}`,"Dec 2040");
+  if(!input) return;let tNum;if(input.includes(" ")){tNum=toNum(input);}else{let c=parseInt(input);if(isNaN(c))return alert("ভুল");tNum=sNum+c-1;}
+  if(tNum<sNum)return alert("ভুল");if(tNum>toNum("Dec 2120"))tNum=toNum("Dec 2120");
+  if(!confirm(`${start} থেকে ${fromNum(tNum)} পর্যন্ত ${tNum-sNum+1} মাস অগ্রিম?`))return;
+  for(let n=sNum;n<=tNum;n++){D.pay[id+"_"+fromNum(n)]=1;}
+  save(); render();
+  let mem=D.members.find(x=>x[0]==id);
+  let msg=`Assalamu Alaikum ${mem[1]}, Apnar ${start} theke ${fromNum(tNum)} porjonto ogrim joma hoyeche. Dhonnobad - Moshauzan`;
+  setTimeout(()=>sendSMS(mem[2], msg), 300);
+}
+function addMember(){if(!checkAdmin()) return; let name=document.getElementById("newName").value,mob=document.getElementById("newMob").value;if(!name||!mob)return alert("নাম ও মোবাইল লিখুন");let newId=D.members.length?Math.max(...D.members.map(x=>x[0]))+1:1;D.members.push([newId,name,mob]);save();render();document.getElementById("newName").value="";document.getElementById("newMob").value="";}
+function addExtra(){
+  if(!checkAdmin()) return;
+  let mid=parseInt(document.getElementById("extraMember").value);
+  let d=document.getElementById("extraDate").value;
+  let amt=parseInt(document.getElementById("extraAmt").value);
+  if(!amt)return alert("টাকা লিখুন");
+  let mem=D.members.find(x=>x[0]==mid);
+  let name=mem?mem[1]:"Unknown";
+  D.extra.push({id:mid,name:name,date:d,amt:amt});
+  save(); render();
+  document.getElementById("extraAmt").value="";
+  let bal=getBal(mid);
+  let msg=`Assalamu Alaikum ${name}, Apnar bishesh joma ${amt} Taka grohon kora hoyeche. Mot joma: ${bal} Taka. Date: ${d} - Moshauzan`;
+  setTimeout(()=>sendSMS(mem[2], msg), 300);
+}
+function addOther(){if(!checkAdmin()) return; let d=document.getElementById("oDate").value,src=document.getElementById("oSrc").value,amt=parseInt(document.getElementById("oAmt").value);if(!src||!amt)return alert("উৎস ও টাকা লিখুন");D.other.push({date:d,src:src,amt:amt});save();render();document.getElementById("oSrc").value="";document.getElementById("oAmt").value="";}
+function addKhoroch(){if(!checkAdmin()) return; let d=document.getElementById("kDate").value,desc=document.getElementById("kDesc").value,amt=parseInt(document.getElementById("kAmt").value);if(!desc||!amt)return alert("বিবরণ ও টাকা লিখুন");D.khoroch.push({date:d,desc:desc,amt:amt});save();render();document.getElementById("kDesc").value="";document.getElementById("kAmt").value="";}
+function addInterest(){if(!checkAdmin()) return; let a=parseInt(document.getElementById("intAmt").value);if(!a)return alert("টাকা লিখুন");D.interest+=a;save();render();document.getElementById("intAmt").value="";}
+function setBank(){if(!checkAdmin()) return; let a=parseInt(document.getElementById("startBank").value);if(isNaN(a))return;D.bankStart=a;save();render();}
+function resetAll(){if(!checkAdmin()) return; if(!confirm("সব জমা, আয়, ব্যয়, ব্যাংক জিরো করে দিবো?"))return;D={pay:{},other:[],khoroch:[],bankStart:0,interest:0,members:D.members,extra:[]};save();render();}
+function delItem(type, idx){ if(!checkAdmin()) return; if(!confirm("ডিলিট করবেন?")) return; if(type=='other') D.other.splice(idx,1); if(type=='khoroch') D.khoroch.splice(idx,1); if(type=='extra') D.extra.splice(idx,1); save(); render(); }
+function renderLists(){let oH="";D.other.slice().reverse().forEach((k,i)=>{let idx=D.other.length-1-i;oH+=`<div class="list"><span>${k.date} - ${k.src} - ৳${k.amt}</span><button onclick="delItem('other',${idx})" style="background:#c62828;color:#fff;border:none;padding:2px 5px;border-radius:4px">X</button></div>`;});document.getElementById("oList").innerHTML=oH||"<small style='color:#aaa'>কোনো আয় নেই</small>";let kH="";D.khoroch.slice().reverse().forEach((k,i)=>{let idx=D.khoroch.length-1-i;kH+=`<div class="list"><span>${k.date} - ${k.desc} - ৳${k.amt}</span><button onclick="delItem('khoroch',${idx})" style="background:#c62828;color:#fff;border:none;padding:2px 5px;border-radius:4px">X</button></div>`;});document.getElementById("kList").innerHTML=kH||"<small style='color:#aaa'>কোনো ব্যয় নেই</small>";let eH="";D.extra.slice().reverse().forEach((k,i)=>{let idx=D.extra.length-1-i;eH+=`<div class="list"><span>${k.date} - ${k.name} - ৳${k.amt}</span><button onclick="delItem('extra',${idx})" style="background:#c62828;color:#fff;border:none;padding:2px 5px;border-radius:4px">X</button></div>`;});document.getElementById("extraList").innerHTML=eH||"<small style='color:#aaa'>কোনো জমা নেই</small>";}
+function exportExcel(){let csv="\uFEFF";csv+=`ID,Name,Total Balance\n`;D.members.forEach(([id,name])=>{let b=getBal(id);csv+=`${id},"${name}",${b}\n`;});let blob=new Blob([csv],{type:"application/vnd.ms-excel"});let url=URL.createObjectURL(blob);let a=document.createElement("a");a.href=url;a.download="Moshauzan.xls";a.click();}
+</script>
+</body>
+</html>

@@ -1,94 +1,140 @@
 <!DOCTYPE html>
-<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>মশাউজান ইসলামী যুব সংঘ</title>
+<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moshauzan Islami Jubo Songgo</title>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
-<style>*{box-sizing:border-box;font-family:'Hind Siliguri',Arial}body{margin:0;background:#071e13;color:#fff}
-header{background:linear-gradient(135deg,#0f3d26,#123a26);padding:16px;text-align:center;border-bottom:2px solid #f5c518}
-header h1{margin:0;font-size:22px;color:#f5c518}header p{margin:5px 0 0;font-size:13px;opacity:.9}
-.wrap{padding:10px}.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.card{background:linear-gradient(145deg,#1a4230,#173d2d);border:1px solid #2e5a44;border-radius:14px;padding:12px;text-align:center;cursor:pointer;box-shadow:0 4px 14px #0003}.card b{display:block;font-size:17px;color:#f5c518}.card span{font-size:12px;color:#cbd5e1}
-.box{background:#fff;color:#111;border-radius:16px;padding:12px;margin-top:10px;box-shadow:0 8px 30px #0002}.tabs{display:flex;gap:6px;margin-top:10px}.tabs button{flex:1;padding:12px;border:0;border-radius:12px;background:#1a4230;color:#fff;font-weight:700}.tabs button.on{background:#f5c518;color:#111}
-input,select{width:100%;padding:13px;border:1.5px solid #e2e8f0;border-radius:12px;margin-bottom:10px;font-size:15px;outline:none}input:focus,select:focus{border-color:#f5c518}
-.btn{width:100%;padding:13px;border:0;border-radius:12px;background:#f5c518;font-weight:700;font-size:16px;box-shadow:0 4px 14px #f5c51855}.btnG{background:#16a34a;color:#fff}.btnR{background:#dc2626;color:#fff}
-.row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px dashed #e2e8f0}.dot{width:14px;height:14px;border-radius:50%;display:inline-block}.green{background:#22c55e;box-shadow:0 0 10px #22c55e}.red{background:#ef4444;box-shadow:0 0 10px #ef4444}
-.hide{display:none}
-/* --- PREMIUM LOGIN --- */
-#loginWrap{min-height:100vh;background:radial-gradient(600px 300px at 50% -50px,#1e5a3a,transparent),#071e13;display:flex;align-items:center;justify-content:center;padding:18px}
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Hind Siliguri',Arial}
+body{background:#000;display:flex;justify-content:center}
+.app{width:100%;max-width:430px;background:#0a2214;min-height:100vh;border:2px solid #c9a86a;color:#fff}
+/* PREMIUM LOGIN */
+#loginWrap{position:fixed;inset:0;background:radial-gradient(600px 300px at 50% -50px,#1e5a3a,transparent),#071e13;display:flex;align-items:center;justify-content:center;padding:18px;z-index:999}
 #login{width:100%;max-width:400px;background:#fff;color:#111;border-radius:22px;padding:26px 22px;box-shadow:0 20px 50px #0008;text-align:center;position:relative;overflow:hidden}
 #login:before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#f5c518,#16a34a,#f5c518)}
-#login .logo{width:68px;height:68px;background:#0f3d26;color:#f5c518;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 10px;box-shadow:0 6px 18px #0f3d2644}
-#login h2{margin:0;font-size:26px}#login p.sub{margin:6px 0 18px;color:#64748b;font-size:14px}
+#login .logo{width:68px;height:68px;background:#0f3d26;color:#f5c518;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 10px}
+#login h2{font-size:26px}#login p.sub{color:#64748b;font-size:14px;margin:6px 0 18px}
 #login label{display:block;text-align:left;font-size:13px;font-weight:700;margin:0 0 6px;color:#334155}
-.modal{position:fixed;inset:0;background:#000a;display:none;align-items:flex-end;justify-content:center}.modal>div{background:#fff;color:#111;width:100%;max-width:500px;max-height:85vh;overflow:auto;border-radius:18px 18px 0 0;padding:14px}
+#login input,#login select{width:100%;padding:13px;border:1.5px solid #e2e8f0;border-radius:12px;margin-bottom:10px;font-size:15px;outline:none}
+#login button{width:100%;padding:13px;border:0;border-radius:12px;background:#f5c518;font-weight:700;font-size:16px;box-shadow:0 4px 14px #f5c51855;cursor:pointer}
+.head{text-align:center;padding:12px;border-bottom:2px solid #c9a86a;color:#ffe9a8}
+.head small{color:#fff}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;padding:8px}
+.card{background:linear-gradient(145deg,#143d27,#173d2d);border:1px solid #c9a86a;border-radius:10px;padding:8px;text-align:center;cursor:pointer;box-shadow:0 4px 12px #0003}
+.card h2{color:#ffe9a8;font-size:12px}.card small{font-size:11px}
+.net{background:#e6c87a;color:#000;text-align:center;padding:8px;margin:0 8px;border-radius:8px;font-weight:800;font-size:11px}
+.section{margin:8px;border:1px solid #2d5a3d;border-radius:10px;background:#102f1f;overflow:hidden}
+.sum{padding:10px;font-weight:800;color:#ffe9a8;cursor:pointer;display:flex;justify-content:space-between;background:#143d27;list-style:none;font-size:12px}
+.m{padding:6px 8px;border-bottom:1px solid #1a3d26;font-size:10.5px}
+.row{display:flex;justify-content:space-between;align-items:center}
+.paid{background:#a5d6a7;color:#000;border:none;padding:3px 6px;border-radius:8px;font-size:9px}.due{background:#ffccbc;color:#000;border:none;padding:3px 6px;border-radius:8px;font-size:9px}
+.adv{background:#ffe082;color:#000;border:none;padding:2px 5px;border-radius:5px;font-size:8px;margin-left:2px}
+.bati{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:5px}
+.bal{font-size:9px;color:#ffe9a8;background:#00000055;padding:2px 5px;border-radius:10px;margin-left:6px}
+.sms{font-size:8px;background:#25D366;color:#000;border:none;padding:2px 5px;border-radius:4px;margin-left:2px}
+.inp{width:100%;padding:6px;border-radius:5px;border:1px solid #2d5a3d;background:#0a2214;color:#fff;margin-bottom:5px;font-size:11px}
+.btn{width:100%;padding:7px;border:none;border-radius:6px;font-weight:800;font-size:11px;cursor:pointer}
+.btnR{background:#c62828;color:#fff}.btnG{background:#2e7d32;color:#fff}.btnY{background:#e6c87a;color:#000}
+.list{padding:6px;font-size:11px;border-bottom:1px solid #1a3d26;display:flex;justify-content:space-between}
+.contact{text-align:center;padding:12px;border:1px solid #c9a86a;border-radius:10px;margin:8px;background:#102f1f;font-size:11px;line-height:1.6}
+.tabs{display:flex;gap:5px;padding:0 8px}.tabs button{flex:1;padding:9px;border:0;border-radius:8px;background:#143d27;color:#fff;font-weight:700;font-size:11px}.tabs button.on{background:#e6c87a;color:#000}
+.modal{position:fixed;inset:0;background:#000a;display:none;align-items:flex-end;justify-content:center;z-index:1000}.modal>div{background:#fff;color:#111;width:100%;max-width:430px;max-height:85vh;overflow:auto;border-radius:16px 16px 0 0;padding:14px}
 </style></head><body>
 
 <div id="loginWrap"><div id="login">
-<div class="logo">🕌</div>
-<h2>লগইন করুন</h2>
-<p class="sub">মশাউজান ইসলামী যুব সংঘ</p>
-<label>ভূমিকা বেছে নিন</label>
-<select id="role"><option value="admin">👑 এডমিন</option><option value="member">👤 সদস্য</option><option value="president">🕌 সভাপতি</option></select>
+<div class="logo">🕌</div><h2>লগইন করুন</h2><p class="sub">মশাউজান ইসলামী যুব সংঘ</p>
+<label>ভূমিকা বেছে নিন</label><select id="role"><option value="admin">👑 এডমিন</option><option value="member">👤 সদস্য</option><option value="president">🕌 সভাপতি - পিছনের তারিখ</option></select>
 <label>পাসওয়ার্ড</label>
-<input id="pass" type="password" placeholder="••••••••">
-<button class="btn" onclick="doLogin()">প্রবেশ করুন →</button>
-<p style="font-size:12px;color:#94a3b8;margin:14px 0 0">🔒 আপনার তথ্য সম্পূর্ণ নিরাপদ</p>
+<div style="position:relative">
+<input id="pass" type="password" placeholder="••••••••" style="padding-right:45px">
+<span onclick="togglePass()" id="eyeBtn" style="position:absolute;right:12px;top:13px;cursor:pointer;font-size:19px">👁️</span>
+</div>
+<button onclick="doLogin()">প্রবেশ করুন →</button>
+<p style="font-size:12px;color:#94a3b8;margin-top:14px">🔒 আপনার তথ্য সম্পূর্ণ নিরাপদ</p>
 </div></div>
 
-<div id="app" class="hide">
-<header><h1>🕌 মশাউজান ইসলামী যুব সংঘ</h1><p>নগরকান্দা, ফরিদপুর • রানিং মাস: <b>নভেম্বর ২০২৬</b></p></header>
-<div class="wrap">
-<div style="display:flex;justify-content:space-between;align-items:center"><span id="who"></span><button onclick="location.reload()" style="padding:7px 14px;border-radius:10px;border:0;background:#fff;font-weight:700">লগআউট</button></div>
+<div class="app">
+<div class="head"><b>🌳 Moshauzan Islami Jubo Songgo</b><br>Nagarkanda, Faridpur<br><small id="who">—</small> <button onclick="location.reload()" style="padding:3px 8px;border-radius:6px;border:0;background:#fff;font-weight:700;font-size:10px">লগআউট</button></div>
 <div class="cards">
-<div class="card" onclick="openDetail('memberIncome')"><span>সদস্য আয়</span><b id="cMember">৳1,249,979</b></div>
-<div class="card" onclick="openDetail('otherIncome')"><span>অন্যান্য আয়</span><b>৳0</b></div>
-<div class="card" onclick="openDetail('totalExpense')"><span>মোট ব্যয়</span><b id="cExp">৳0</b></div>
-<div class="card" onclick="openDetail('bankInterest')"><span>ব্যাংক ইন্টারেস্ট</span><b>৳0</b></div>
-<div class="card" onclick="openDetail('totalIncome')"><span>মোট আয়</span><b id="cTotal">৳1,249,979</b></div>
-<div class="card" onclick="openDetail('bankBalance')"><span>ব্যাংক ব্যালেন্স</span><b id="cBank">৳1,249,979</b></div>
+<div class="card" onclick="openDetail('member')"><small>সদস্য আয়</small><h2 id="mInc">৳0</h2></div>
+<div class="card" onclick="openDetail('other')"><small>অন্যান্য আয়</small><h2 id="oInc">৳0</h2></div>
+<div class="card" onclick="openDetail('exp')"><small>মোট ব্যয়</small><h2 id="exp">৳0</h2></div>
 </div>
-<div class="tabs"><button onclick="showTab('paid',this)" class="on">🟢 জমা দিয়েছে</button><button onclick="showTab('due',this)">🔴 বাকি আছে</button><button onclick="showTab('balance',this)">📋 সবার ব্যালেন্স</button></div>
-<div class="box">
-<div id="adminBox"><h3 style="margin:0 0 10px">➕ নতুন জমা / সদস্য</h3>
-<input id="mName" placeholder="সদস্যের নাম"><input id="mAmt" type="number" placeholder="টাকা - যেমন 500"><input id="mNote" placeholder="কিসের টাকা? মাসিক চাঁদা / অনুদান">
-<select id="mMonth"><option>নভেম্বর ২০২৬ - রানিং মাস</option><option>অক্টোবর ২০২৬ - পিছনের মাস (সভাপতির অনুমতি লাগবে)</option><option>সেপ্টেম্বর ২০২৬ - পিছনের মাস</option></select>
-<button class="btn btnG" onclick="addPay()">✅ জমা নিন - সবুজ হবে</button>
-<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="flex:1" onclick="addExpense()">💸 খরচ যোগ</button><button class="btn" style="flex:1;background:#111;color:#fff" onclick="addMemberOnly()">👤 সদস্য যোগ</button></div>
-<p id="adminMsg" style="font-size:13px;color:#dc2626"></p></div>
-<div id="tabPaid"></div><div id="tabDue" class="hide"></div><div id="tabBalance" class="hide"></div>
-</div></div></div>
-<div class="modal" id="modal"><div><div style="display:flex;justify-content:space-between"><h3 id="modalTitle" style="margin:0"></h3><button onclick="closeModal()" style="border:0;background:#eee;padding:6px 12px;border-radius:8px">✕</button></div><div id="modalBody"></div></div></div>
+<div class="cards">
+<div class="card" onclick="openDetail('int')"><small>ব্যাংক ইন্টারেস্ট</small><h2 id="int">৳0</h2></div>
+<div class="card" onclick="openDetail('total')"><small>মোট আয়</small><h2 id="tInc">৳0</h2></div>
+<div class="card" onclick="openDetail('bank')"><small>ব্যাংক ব্যালেন্স</small><h2 id="bank">৳0</h2></div>
+</div>
+<div class="net" id="net"></div>
+<div class="tabs" style="margin-top:8px"><button class="on" onclick="setFilter('all',this)">📋 সবাই</button><button onclick="setFilter('paid',this)">🟢 জমা দিয়েছে</button><button onclick="setFilter('due',this)">🔴 বাকি আছে</button><button onclick="setFilter('bal',this)">💰 ব্যালেন্স</button></div>
+<details class="section" open><summary class="sum"><span>👥 সদস্য তালিকা - রানিং মাস</span><span>▼</span></summary>
+<div style="padding:6px">
+<select id="mon" onchange="render()" style="width:100%;padding:6px;border-radius:5px"></select>
+<div id="boxM" style="margin-top:6px"></div>
+<div id="dueBox" style="background:#3d0a0a;border:1px solid #ff1744;border-radius:8px;padding:8px;margin-top:8px"></div>
+<div id="adminAdd" style="display:flex;gap:4px;margin-top:8px"><input id="newName" placeholder="নতুন সদস্যের নাম" class="inp" style="flex:1"><input id="newMob" placeholder="মোবাইল" class="inp" style="flex:1"></div>
+<button id="addBtn" class="btn btnG" onclick="addMember()">+ নতুন সদস্য যোগ করুন</button>
+</div></details>
+<details class="section"><summary class="sum"><span>💰 বিশেষ জমা</span><span>▼</span></summary><div style="padding:8px"><select id="extraMember" class="inp"></select><input id="extraDate" type="date" class="inp"><input id="extraAmt" type="number" placeholder="টাকা" class="inp"><button class="btn btnY" onclick="addExtra()">+ জমা করুন + SMS</button><div id="extraList"></div></div></details>
+<details class="section"><summary class="sum"><span>➕ অন্যান্য আয়</span><span>▼</span></summary><div style="padding:8px"><input id="oDate" type="date" class="inp"><input id="oSrc" placeholder="উৎস" class="inp"><input id="oAmt" type="number" placeholder="টাকা" class="inp"><button class="btn btnY" onclick="addOther()">+ আয় যোগ</button><div id="oList"></div></div></details>
+<details class="section"><summary class="sum"><span>💸 ব্যয়</span><span>▼</span></summary><div style="padding:8px"><input id="kDate" type="date" class="inp"><input id="kDesc" placeholder="বিবরণ" class="inp"><input id="kAmt" type="number" placeholder="টাকা" class="inp"><button class="btn btnR" onclick="addKhoroch()">+ ব্যয় যোগ</button><div id="kList"></div></div></details>
+<details class="section"><summary class="sum"><span>🏦 ব্যাংক</span><span>▼</span></summary><div style="padding:8px"><input id="startBank" type="number" placeholder="শুরুর ব্যাংক" class="inp"><input id="intAmt" type="number" placeholder="ইন্টারেস্ট" class="inp"><div style="display:flex;gap:4px"><button class="btn btnY" style="flex:1" onclick="setBank()">ব্যাংক সেট</button><button class="btn btnG" style="flex:1" onclick="addInterest()">+ ইন্টারেস্ট</button></div><button class="btn btnR" style="margin-top:6px" onclick="resetAll()">🗑️ সব জিরো করুন</button></div></details>
+<div class="contact"><b>Masud Khan - 01723-339065</b><br><a href="tel:01723339065" style="background:#e6c87a;color:#000;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:800;display:inline-block;margin-top:6px">📞 Call করুন</a></div>
+</div>
+<div class="modal" id="modal"><div><div style="display:flex;justify-content:space-between"><h3 id="modalTitle"></h3><button onclick="closeModal()" style="border:0;background:#eee;padding:6px 12px;border-radius:8px">✕</button></div><div id="modalBody"></div></div></div>
 <script>
-let role='';let unlocked=false;
-let members=JSON.parse(localStorage.getItem('m_members')||'null')||[{name:'মাসুদ খান',paid:5000,totalPaid:125000},{name:'রহিম মিয়া',paid:0,totalPaid:118000},{name:'করিম শেখ',paid:500,totalPaid:95000},{name:'আব্দুল্লাহ',paid:500,totalPaid:88000},{name:'সোহেল রানা',paid:0,totalPaid:76000}];
-let tx=JSON.parse(localStorage.getItem('m_tx')||'[]');let exps=JSON.parse(localStorage.getItem('m_exp')||'[]');
-function save(){localStorage.setItem('m_members',JSON.stringify(members));localStorage.setItem('m_tx',JSON.stringify(tx));localStorage.setItem('m_exp',JSON.stringify(exps));render();}
+let ROLE='';let UNLOCKED=false;let FILTER='all';
+function togglePass(){let p=document.getElementById('pass');let e=document.getElementById('eyeBtn');if(p.type=='password'){p.type='text';e.innerText='🙈';}else{p.type='password';e.innerText='👁️';}}
+function checkAdmin(){if(ROLE=='member'){alert('সদস্যরা বদলাতে পারবে না - শুধু দেখতে পারবে');return false;} if(ROLE=='admin'||ROLE=='president')return true; return false;}
 function doLogin(){let r=document.getElementById('role').value;let p=document.getElementById('pass').value;
-if(r=='admin'&&p=='9065.@mk'){role='admin';unlocked=true;}
-else if(r=='member'&&p=='admin@123'){role='member';}
-else if(r=='president'&&p=='masud@123'){role='president';unlocked=true;}
-else return alert('ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।');
-document.getElementById('loginWrap').style.display='none';document.getElementById('app').classList.remove('hide');
-document.getElementById('who').innerText=r=='admin'?'👑 এডমিন মোড':r=='member'?'👤 সদস্য মোড (শুধু দেখা যাবে)':'🕌 সভাপতি মোড - পিছনের তারিখ খোলা';
-if(role=='member')document.getElementById('adminBox').style.display='none';render();}
-function showTab(id,b){['tabPaid','tabDue','tabBalance'].forEach(x=>document.getElementById(x).classList.add('hide'));document.getElementById('tab'+id.charAt(0).toUpperCase()+id.slice(1)).classList.remove('hide');document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');}
-function addMemberOnly(){let n=document.getElementById('mName').value.trim();if(!n)return alert('নাম লিখুন');members.push({name:n,paid:0,totalPaid:0});save();alert('সদস্য যোগ হইছে');}
-function addPay(){if(role=='member')return alert('সদস্যরা জমা নিতে পারবে না');
-let n=document.getElementById('mName').value.trim();let a=+document.getElementById('mAmt').value;let mo=document.getElementById('mMonth').value;
-if(mo.includes('পিছনের')&&!unlocked){document.getElementById('adminMsg').innerText='⚠️ পিছনের তারিখ খুলতে সভাপতির পাসওয়ার্ড দিয়ে লগইন করতে হবে।';return;}
-if(!n||!a)return alert('নাম আর টাকা লিখুন');let idx=members.findIndex(m=>m.name==n);if(idx<0){members.push({name:n,paid:0,totalPaid:0});idx=members.length-1;}
-members[idx].paid+=a;members[idx].totalPaid+=a;tx.push({name:n,amt:a,note:document.getElementById('mNote').value||'মাসিক চাঁদা',month:mo,date:new Date().toLocaleDateString('bn-BD')});save();alert('জমা হইছে - এখন সবুজ বাতি জ্বলবে 🟢');}
-function addExpense(){let n=prompt('কিসে খরচ?');let a=+prompt('কত টাকা?');if(!n||!a)return;exps.push({note:n,amt:a,date:new Date().toLocaleDateString('bn-BD')});save();}
-function render(){let paid=members.filter(m=>m.paid>0);let due=members.filter(m=>m.paid<=0);
-document.getElementById('tabPaid').innerHTML='<h3>🟢 রানিং মাসে জমা দিয়েছে - '+paid.length+' জন</h3>'+paid.map(m=>`<div class="row"><span><span class="dot green"></span> <b>${m.name}</b><br><span style="font-size:12px;color:#666">এই মাসে দিছে ${m.paid}৳</span></span><b style="color:#16a34a">${m.paid}৳ ✅</b></div>`).join('')||'কেউ জমা দেয় নাই';
-document.getElementById('tabDue').innerHTML='<h3 style="color:#dc2626">🔴 রানিং মাসে এখনো দেয় নাই - '+due.length+' জন</h3>'+due.map(m=>`<div class="row" style="background:#fef2f2;border-radius:8px;padding:10px"><span><span class="dot red"></span> <b>${m.name}</b><br><span style="font-size:12px;color:#666">বাকি: 500৳ (চাঁদা)</span></span><b style="color:#dc2626">বাকি 🔴</b></div>`).join('')||'সবাই দিয়ে দিছে!';
-document.getElementById('tabBalance').innerHTML='<h3>📋 রানিং মাস পর্যন্ত সবার ব্যালেন্স</h3>'+members.map(m=>`<div class="row" onclick="openMember('${m.name}')"><span><span class="dot ${m.paid>0?'green':'red'}"></span> <b>${m.name}</b><br><span style="font-size:12px;color:#666">মোট জমা: ${m.totalPaid}৳ • এই মাস: ${m.paid}৳</span></span><b>${m.paid>0?'🟢 পেইড':'🔴 বাকি'} →</b></div>`).join('');
-let tot=tx.reduce((a,b)=>a+b.amt,0)+1249979;let expTot=exps.reduce((a,b)=>a+b.amt,0);
-document.getElementById('cMember').innerText='৳'+tot.toLocaleString('en-US');document.getElementById('cTotal').innerText='৳'+tot.toLocaleString('en-US');document.getElementById('cBank').innerText='৳'+(tot-expTot).toLocaleString('en-US');document.getElementById('cExp').innerText='৳'+expTot.toLocaleString('en-US');}
-function openDetail(type){let t={memberIncome:'সদস্য আয় - বিস্তারিত',otherIncome:'অন্যান্য আয়',totalExpense:'মোট ব্যয় - বিস্তারিত',bankInterest:'ব্যাংক ইন্টারেস্ট',totalIncome:'মোট আয়',bankBalance:'ব্যাংক ব্যালেন্স'}[type];
-let body='';if(type=='memberIncome')body=members.map(m=>`<div class="row"><span>${m.name}</span><b>${m.totalPaid}৳</b></div>`).join('')+'<div class="row"><b>মোট</b><b>৳1,249,979</b></div>';
-if(type=='totalExpense')body=exps.map(e=>`<div class="row"><span>${e.note} - ${e.date}</span><b>${e.amt}৳</b></div>`).join('')||'এখনো কোনো খরচ নাই';
-if(type=='bankBalance')body=`<div class="row"><span>মোট আয়</span><b>৳1,249,979</b></div><div class="row"><span>মোট ব্যয়</span><b>৳${exps.reduce((a,b)=>a+b.amt,0)}</b></div><div class="row"><b>ব্যাংকে আছে</b><b>৳${(1249979-exps.reduce((a,b)=>a+b.amt,0)).toLocaleString('en-US')}</b></div>`;
-if(!body)body='<p>এই খাতে এখনো কোনো লেনদেন নাই।</p>';
-document.getElementById('modalTitle').innerText=t;document.getElementById('modalBody').innerHTML=body;document.getElementById('modal').style.display='flex';}
-function openMember(name){let m=members.find(x=>x.name==name);let list=tx.filter(t=>t.name==name).map(t=>`<div class="row"><span>${t.note} - ${t.month}</span><b>${t.amt}৳</b></div>`).join('')||'এখনো লেনদেন নাই';document.getElementById('modalTitle').innerText=name+' - বিস্তারিত';document.getElementById('modalBody').innerHTML=`<div class="row"><span>এই মাসে দিছে</span><b>${m.paid}৳</b></div><div class="row"><span>মোট জমা</span><b>${m.totalPaid}৳</b></div><div class="row"><span>স্ট্যাটাস</span><b>${m.paid>0?'🟢 সবুজ - পেইড':'🔴 লাল - বাকি'}</b></div><h4>লেনদেনের ইতিহাস</h4>${list}`;document.getElementById('modal').style.display='flex';}
-function closeModal(){document.getElementById('modal').style.display='none';}render();
+if(r=='admin'&&p=='9065.@mk'){ROLE='admin';UNLOCKED=true;}
+else if(r=='member'&&p=='admin@123'){ROLE='member';}
+else if(r=='president'&&p=='masud@123'){ROLE='president';UNLOCKED=true;}
+else return alert('ভুল পাসওয়ার্ড!');
+document.getElementById('loginWrap').style.display='none';
+document.getElementById('who').innerText = ROLE=='admin'?'👑 এডমিন মোড':ROLE=='member'?'👤 সদস্য মোড (শুধু দেখা)':'🕌 সভাপতি মোড - পিছনের তারিখ খোলা';
+if(ROLE=='member'){document.getElementById('adminAdd').style.display='none';document.getElementById('addBtn').style.display='none';}
+}
+function setFilter(f,b){FILTER=f;document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');render();}
+const firebaseConfig={apiKey:"AIzaSyAFZ85PVL7HkOswBIVUTJaIAFkWNsnMRAE",authDomain:"moshauzan-islami-jubo-songgo.firebaseapp.com",databaseURL:"https://moshauzan-islami-jubo-songgo-default-rtdb.firebaseio.com",projectId:"moshauzan-islami-jubo-songgo",storageBucket:"moshauzan-islami-jubo-songgo.firebasestorage.app",messagingSenderId:"1084297064431",appId:"1:1084297064431:web:f0b9aff31f23493f9d501a"};
+firebase.initializeApp(firebaseConfig);const dbRef=firebase.database().ref("moshauzan_v2");
+function toArr(x){if(!x)return[];if(Array.isArray(x))return x;return Object.values(x);}
+let defaultMems=[[1,"Md. Mizanur Rahaman","01717694988"],[2,"Md. Monirul Islam","01725667226"],[3,"Md. Faidul islam","01727870526"],[4,"Md. Masowd Khan","01723339065"],[5,"Md. Giash patoary","01914111888"],[6,"Md. Abu Said khan","01714822718"],[7,"Md. Sohrab Hossen","01718738605"],[8,"Md. Chunnu Miah","01855695697"],[9,"Md. Shakhawat Khan","01920655998"],[10,"Md. Mahmud Khan","01918686300"],[11,"Md. Usman Sheikh","01866241726"],[12,"Md. Shorif Munshi","01824158126"],[13,"Md. Delower hossain","01628288720"],[14,"Md. Rajibul Islam","01766287552"],[15,"Md. Mamun Hawlader","01740007828"],[16,"Md. Palash Khan","01612035899"]];
+let D=JSON.parse(localStorage.getItem("MOSH_ZERO_V1")||"null");if(!D){D={pay:{},other:[],khoroch:[],bankStart:0,interest:0,members:defaultMems,extra:[]};}if(!D.extra)D.extra=[];
+let firebaseLoaded=false;
+function save(){localStorage.setItem("MOSH_ZERO_V1",JSON.stringify(D));if(firebaseLoaded){dbRef.set(D);}}
+dbRef.on("value",(snap)=>{let v=snap.val();if(v){D=v;D.members=toArr(v.members);D.other=toArr(v.other);D.khoroch=toArr(v.khoroch);D.extra=toArr(v.extra);if(!D.pay)D.pay={};if(!D.members||D.members.length==0)D.members=defaultMems;if(D.members[0]&&!Array.isArray(D.members[0])){D.members=D.members.map(m=>Object.values(m));}if(!D.extra)D.extra=[];}else{dbRef.set(D);}firebaseLoaded=true;if(!window._genDone){genMonths();window._genDone=true;}render();});
+function genMonths(){let s=document.getElementById("mon");let months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];let html="";for(let y=2020;y<=2120;y++){for(let m=0;m<12;m++){html+=`<option>${months[m]} ${y}</option>`;}}s.innerHTML=html;s.value="Nov 2026";document.getElementById("kDate").valueAsDate=new Date();document.getElementById("oDate").valueAsDate=new Date();document.getElementById("extraDate").valueAsDate=new Date();document.getElementById("startBank").value=D.bankStart;}
+function getAdvanceInfo(id){let months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];function toNum(s){let [mm,yy]=s.split(" ");return parseInt(yy)*12+months.indexOf(mm);}let keys=Object.keys(D.pay).filter(k=>k.startsWith(id+"_")).map(k=>{let datePart=k.split("_").slice(1).join("_");return{key:datePart,num:toNum(datePart)};}).sort((a,b)=>b.num-a.num);if(keys.length==0)return null;return keys[0].key;}
+function getBal(id){let f=Object.keys(D.pay).filter(k=>k.startsWith(id+"_")).length*2000;let e=D.extra.filter(x=>x.id==id).reduce((s,x)=>s+x.amt,0);return f+e;}
+function sendSMS(mobile,message){if(confirm(mobile+" নম্বরে SMS পাঠাবেন?\n\n"+message)){window.location.href=`sms:${mobile}?body=${encodeURIComponent(message)}`;}}
+function render(){let m=document.getElementById("mon").value;let h="";let pc=0;let dueList=[];
+D.members.forEach(([id,name,mob])=>{let k=id+"_"+m;let paid=!!D.pay[k];if(paid)pc++;else dueList.push(name);if(FILTER=='paid'&&!paid)return;if(FILTER=='due'&&paid)return;let batiColor=paid?"#00e676":"#ff1744";let batiShadow=paid?"0 0 8px #00e676":"0 0 8px #ff1744";let bal=getBal(id);let advInfo=getAdvanceInfo(id);let advBadge="";if(advInfo&&advInfo!==m){let months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];function toNum(s){let [mm,yy]=s.split(" ");return parseInt(yy)*12+months.indexOf(mm);}if(toNum(advInfo)>toNum(m)){advBadge=`<div style="color:#ffe082;font-size:9px;margin-top:2px">▶ ${advInfo} পর্যন্ত</div>`;}}
+if(FILTER=='bal'){h+=`<div class="m"><div class="row" onclick="openMember(${id})"><span><span class="bati" style="background:${batiColor};box-shadow:${batiShadow}"></span>${id}. ${name}</span><span><b>মোট: ৳${bal.toLocaleString()}</b> →</span></div></div>`;}
+else{h+=`<div class="m"><div class="row"><span><span class="bati" style="background:${batiColor};box-shadow:${batiShadow}"></span>${id}. ${name} <span class="bal">৳${bal.toLocaleString()}</span></span><span><button class="${paid?'paid':'due'}" onclick="tog(${id})">${paid?'Paid':'Due'}</button><button class="adv" onclick="advPay(${id})">অগ্রিম</button><button class="sms" onclick="manualSMS(${id})">SMS</button></span></div><div style="margin-top:2px"><a href="tel:${mob}" style="color:#ffe9a8;text-decoration:none;font-size:9px">📞 ${mob}</a>${advBadge}</div></div>`;}});document.getElementById("boxM").innerHTML=h;
+document.getElementById("dueBox").innerHTML=`<b style="color:#ff8a80">🔴 এই মাসে বাকি আছে - ${dueList.length} জন (আলাদা তালিকা)</b><div style="font-size:11px;margin-top:4px;color:#fff">${dueList.length?dueList.join(' • '):'সবাই দিয়ে দিছে - আলহামদুলিল্লাহ!'}</div>`;
+let sel=document.getElementById("extraMember");sel.innerHTML=D.members.map(([id,name])=>`<option value="${id}">${id}. ${name}</option>`).join("");let totalFixed=Object.keys(D.pay).length*2000;let totalExtra=D.extra.reduce((a,b)=>a+b.amt,0);let totalMemberIncome=totalFixed+totalExtra;let totalOther=D.other.reduce((a,b)=>a+b.amt,0);let totalExp=D.khoroch.reduce((a,b)=>a+b.amt,0);let totalIncome=totalMemberIncome+totalOther;let currentBank=D.bankStart+totalIncome-totalExp+D.interest;document.getElementById("mInc").innerText="৳"+totalMemberIncome.toLocaleString();document.getElementById("oInc").innerText="৳"+totalOther.toLocaleString();document.getElementById("tInc").innerText="৳"+totalIncome.toLocaleString();document.getElementById("exp").innerText="৳"+totalExp.toLocaleString();document.getElementById("int").innerText="৳"+D.interest.toLocaleString();document.getElementById("bank").innerText="৳"+currentBank.toLocaleString();document.getElementById("net").innerHTML=`${m} (রানিং মাস): 🟢 ${pc} | 🔴 ${D.members.length-pc} | ব্যাংক: ৳${currentBank}`;renderLists();}
+function manualSMS(id){let mem=D.members.find(x=>x[0]==id);if(!mem)return;let bal=getBal(id);let msg=`Assalamu Alaikum ${mem[1]}, Apnar Moshauzan er mot joma: ${bal} Taka. Dhonnobad - Masud Khan`;sendSMS(mem[2],msg);}
+function tog(id){if(!checkAdmin())return;let m=document.getElementById("mon").value;if(m!=="Nov 2026"&&!UNLOCKED){alert('⚠️ পিছনের মাস খুলতে সভাপতির পাসওয়ার্ড দিয়ে লগইন করতে হবে।');return;}let k=id+"_"+m;let mem=D.members.find(x=>x[0]==id);if(D.pay[k]){if(!confirm("বাতিল করবেন?"))return;delete D.pay[k];}else{D.pay[k]=1;let bal=getBal(id);let msg=`Assalamu Alaikum ${mem[1]}, Apnar ${m} masher 2000 Taka joma hoyeche. Mot joma: ${bal} Taka. - Moshauzan Songgo`;save();render();setTimeout(()=>sendSMS(mem[2],msg),300);return;}save();render();}
+function advPay(id){if(!checkAdmin())return;let months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];function toNum(s){let [mm,yy]=s.split(" ");return parseInt(yy)*12+months.indexOf(mm);}function fromNum(n){let y=Math.floor(n/12),m=n%12;return `${months[m]} ${y}`;}let start=document.getElementById("mon").value;let sNum=toNum(start);let input=prompt(`অগ্রিম কত মাস পর্যন্ত দিবে?\nশুরু: ${start}`,"Dec 2040");if(!input)return;let tNum;if(input.includes(" ")){tNum=toNum(input);}else{let c=parseInt(input);if(isNaN(c))return alert("ভুল");tNum=sNum+c-1;}if(tNum<sNum)return alert("ভুল");if(tNum>toNum("Dec 2120"))tNum=toNum("Dec 2120");if(!confirm(`${start} থেকে ${fromNum(tNum)} পর্যন্ত ${tNum-sNum+1} মাস অগ্রিম?`))return;for(let n=sNum;n<=tNum;n++){D.pay[id+"_"+fromNum(n)]=1;}save();render();let mem=D.members.find(x=>x[0]==id);let msg=`Assalamu Alaikum ${mem[1]}, Apnar ${start} theke ${fromNum(tNum)} porjonto ogrim joma hoyeche. Dhonnobad - Moshauzan`;setTimeout(()=>sendSMS(mem[2],msg),300);}
+function addMember(){if(!checkAdmin())return;let name=document.getElementById("newName").value,mob=document.getElementById("newMob").value;if(!name||!mob)return alert("নাম ও মোবাইল লিখুন");let newId=D.members.length?Math.max(...D.members.map(x=>x[0]))+1:1;D.members.push([newId,name,mob]);save();render();document.getElementById("newName").value="";document.getElementById("newMob").value="";}
+function addExtra(){if(!checkAdmin())return;let mid=parseInt(document.getElementById("extraMember").value);let d=document.getElementById("extraDate").value;let amt=parseInt(document.getElementById("extraAmt").value);if(!amt)return alert("টাকা লিখুন");let mem=D.members.find(x=>x[0]==mid);let name=mem?mem[1]:"Unknown";D.extra.push({id:mid,name:name,date:d,amt:amt});save();render();document.getElementById("extraAmt").value="";let bal=getBal(mid);let msg=`Assalamu Alaikum ${name}, Apnar bishesh joma ${amt} Taka grohon kora hoyeche. Mot joma: ${bal} Taka. Date: ${d} - Moshauzan`;setTimeout(()=>sendSMS(mem[2],msg),300);}
+function addOther(){if(!checkAdmin())return;let d=document.getElementById("oDate").value,src=document.getElementById("oSrc").value,amt=parseInt(document.getElementById("oAmt").value);if(!src||!amt)return alert("উৎস ও টাকা লিখুন");D.other.push({date:d,src:src,amt:amt});save();render();document.getElementById("oSrc").value="";document.getElementById("oAmt").value="";}
+function addKhoroch(){if(!checkAdmin())return;let d=document.getElementById("kDate").value,desc=document.getElementById("kDesc").value,amt=parseInt(document.getElementById("kAmt").value);if(!desc||!amt)return alert("বিবরণ ও টাকা লিখুন");D.khoroch.push({date:d,desc:desc,amt:amt});save();render();document.getElementById("kDesc").value="";document.getElementById("kAmt").value="";}
+function addInterest(){if(!checkAdmin())return;let a=parseInt(document.getElementById("intAmt").value);if(!a)return alert("টাকা লিখুন");D.interest+=a;save();render();document.getElementById("intAmt").value="";}
+function setBank(){if(!checkAdmin())return;let a=parseInt(document.getElementById("startBank").value);if(isNaN(a))return;D.bankStart=a;save();render();}
+function resetAll(){if(!checkAdmin())return;if(!confirm("সব জমা, আয়, ব্যয়, ব্যাংক জিরো করে দিবো?"))return;D={pay:{},other:[],khoroch:[],bankStart:0,interest:0,members:D.members,extra:[]};save();render();}
+function delItem(type,idx){if(!checkAdmin())return;if(!confirm("ডিলিট করবেন?"))return;if(type=='other')D.other.splice(idx,1);if(type=='khoroch')D.khoroch.splice(idx,1);if(type=='extra')D.extra.splice(idx,1);save();render();}
+function renderLists(){let oH="";D.other.slice().reverse().forEach((k,i)=>{let idx=D.other.length-1-i;oH+=`<div class="list"><span>${k.date} - ${k.src} - ৳${k.amt}</span><button onclick="delItem('other',${idx})" style="background:#c62828;color:#fff;border:none;padding:2px 5px;border-radius:4px">X</button></div>`;});document.getElementById("oList").innerHTML=oH||"<small style='color:#aaa'>কোনো আয় নেই</small>";let kH="";D.khoroch.slice().reverse().forEach((k,i)=>{let idx=D.khoroch.length-1-i;kH+=`<div class="list"><span>${k.date} - ${k.desc} - ৳${k.amt}</span><button onclick="delItem('khoroch',${idx})" style="background:#c62828;color:#fff;border:none;padding:2px 5px;border-radius:4px">X</button></div>`;});document.getElementById("kList").innerHTML=kH||"<small style='color:#aaa'>কোনো ব্যয় নেই</small>";let eH="";D.extra.slice().reverse().forEach((k,i)=>{let idx=D.extra.length-1-i;eH+=`<div class="list"><span>${k.date} - ${k.name} - ৳${k.amt}</span><button onclick="delItem('extra',${idx})" style="background:#c62828;color:#fff;border:none;padding:2px 5px;border-radius:4px">X</button></div>`;});document.getElementById("extraList").innerHTML=eH||"<small style='color:#aaa'>কোনো জমা নেই</small>";}
+function openDetail(type){let totalFixed=Object.keys(D.pay).length*2000;let totalExtra=D.extra.reduce((a,b)=>a+b.amt,0);let totalMember=totalFixed+totalExtra;let totalOther=D.other.reduce((a,b)=>a+b.amt,0);let totalExp=D.khoroch.reduce((a,b)=>a+b.amt,0);let totalInc=totalMember+totalOther;let bank=D.bankStart+totalInc-totalExp+D.interest;
+let title={member:'সদস্য আয় - বিস্তারিত',other:'অন্যান্য আয় - বিস্তারিত',exp:'মোট ব্যয় - বিস্তারিত',int:'ব্যাংক ইন্টারেস্ট - বিস্তারিত',total:'মোট আয় - বিস্তারিত',bank:'ব্যাংক ব্যালেন্স - বিস্তারিত'}[type];let body='';
+if(type=='member')body=D.members.map(([id,name])=>`<div class="row" style="padding:8px 0;border-bottom:1px dashed #ddd"><span>${id}. ${name}</span><b>৳${getBal(id).toLocaleString()}</b></div>`).join('')+`<div class="row" style="padding:10px 0"><b>মোট সদস্য আয়</b><b>৳${totalMember.toLocaleString()}</b></div>`;
+if(type=='other')body=D.other.map(o=>`<div class="row" style="padding:8px 0;border-bottom:1px dashed #ddd"><span>${o.date} - ${o.src}</span><b>৳${o.amt}</b></div>`).join('')||'কোনো আয় নেই';
+if(type=='exp')body=D.khoroch.map(o=>`<div class="row" style="padding:8px 0;border-bottom:1px dashed #ddd"><span>${o.date} - ${o.desc}</span><b>৳${o.amt}</b></div>`).join('')||'কোনো ব্যয় নেই';
+if(type=='int')body=`<div class="row"><span>মোট ইন্টারেস্ট</span><b>৳${D.interest.toLocaleString()}</b></div>`;
+if(type=='total')body=`<div class="row"><span>সদস্য আয়</span><b>৳${totalMember.toLocaleString()}</b></div><div class="row"><span>অন্যান্য আয়</span><b>৳${totalOther.toLocaleString()}</b></div><div class="row"><b>মোট আয়</b><b>৳${totalInc.toLocaleString()}</b></div>`;
+if(type=='bank')body=`<div class="row"><span>শুরুর ব্যাংক</span><b>৳${D.bankStart}</b></div><div class="row"><span>মোট আয়</span><b>৳${totalInc.toLocaleString()}</b></div><div class="row"><span>মোট ব্যয়</span><b>৳${totalExp.toLocaleString()}</b></div><div class="row"><span>ইন্টারেস্ট</span><b>৳${D.interest}</b></div><div class="row"><b>ব্যাংকে আছে</b><b>৳${bank.toLocaleString()}</b></div>`;
+document.getElementById('modalTitle').innerText=title;document.getElementById('modalBody').innerHTML=body;document.getElementById('modal').style.display='flex';}
+function openMember(id){let mem=D.members.find(x=>x[0]==id);let bal=getBal(id);let paidMonths=Object.keys(D.pay).filter(k=>k.startsWith(id+"_")).map(k=>k.split("_").slice(1).join(" ")).join(', ');document.getElementById('modalTitle').innerText=mem[1]+' - বিস্তারিত';document.getElementById('modalBody').innerHTML=`<div class="row"><span>মোবাইল</span><b>${mem[2]}</b></div><div class="row"><span>মোট জমা</span><b>৳${bal.toLocaleString()}</b></div><div class="row"><span>রানিং মাস (Nov 2026)</span><b>${D.pay[id+"_Nov 2026"]?'🟢 সবুজ - পেইড':'🔴 লাল - বাকি'}</b></div><p style="margin-top:10px;font-size:13px">জমা দেওয়া মাস: ${paidMonths||'কোনোটা নাই'}</p>`;document.getElementById('modal').style.display='flex';}
+function closeModal(){document.getElementById('modal').style.display='none';}
 </script></body></html>

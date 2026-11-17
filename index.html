@@ -1,85 +1,88 @@
 <!DOCTYPE html>
 <html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>মশাউজান ইসলামী যুব সংঘ</title>
-<style>*{box-sizing:border-box;font-family:Hind Siliguri,Arial}body{margin:0;background:#0f2a1a;color:#fff}header{background:#123a26;padding:14px;text-align:center;border-bottom:2px solid #f5c518}header h1{margin:0;font-size:21px;color:#f5c518}header p{margin:4px 0 0;font-size:13px}
-.wrap{padding:10px}.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.card{background:#1a4230;border:1px solid #2e5a44;border-radius:10px;padding:10px;text-align:center;cursor:pointer}.card b{display:block;font-size:17px;color:#f5c518}.card span{font-size:12px;color:#cbd5e1}
-.box{background:#fff;color:#111;border-radius:12px;padding:12px;margin-top:10px}.tabs{display:flex;gap:6px;margin-top:10px}.tabs button{flex:1;padding:11px;border:0;border-radius:10px;background:#1a4230;color:#fff;font-weight:700}.tabs button.on{background:#f5c518;color:#111}
-input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:10px;margin-bottom:8px} .btn{width:100%;padding:12px;border:0;border-radius:10px;background:#f5c518;font-weight:700}.btnG{background:#16a34a;color:#fff}.btnR{background:#dc2626;color:#fff}
-.row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed #e2e8f0}.dot{width:14px;height:14px;border-radius:50%;display:inline-block}.green{background:#22c55e;box-shadow:0 0 8px #22c55e}.red{background:#ef4444;box-shadow:0 0 8px #ef4444}
-.pill{padding:4px 8px;border-radius:20px;font-size:12px;font-weight:700;color:#fff}.hide{display:none}
-#login{max-width:420px;margin:30px auto;background:#fff;color:#111;border-radius:14px;padding:18px}
-.modal{position:fixed;inset:0;background:#000a;display:none;align-items:flex-end;justify-content:center}.modal>div{background:#fff;color:#111;width:100%;max-width:500px;max-height:85vh;overflow:auto;border-radius:16px 16px 0 0;padding:14px}
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;font-family:'Hind Siliguri',Arial}body{margin:0;background:#071e13;color:#fff}
+header{background:linear-gradient(135deg,#0f3d26,#123a26);padding:16px;text-align:center;border-bottom:2px solid #f5c518}
+header h1{margin:0;font-size:22px;color:#f5c518}header p{margin:5px 0 0;font-size:13px;opacity:.9}
+.wrap{padding:10px}.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.card{background:linear-gradient(145deg,#1a4230,#173d2d);border:1px solid #2e5a44;border-radius:14px;padding:12px;text-align:center;cursor:pointer;box-shadow:0 4px 14px #0003}.card b{display:block;font-size:17px;color:#f5c518}.card span{font-size:12px;color:#cbd5e1}
+.box{background:#fff;color:#111;border-radius:16px;padding:12px;margin-top:10px;box-shadow:0 8px 30px #0002}.tabs{display:flex;gap:6px;margin-top:10px}.tabs button{flex:1;padding:12px;border:0;border-radius:12px;background:#1a4230;color:#fff;font-weight:700}.tabs button.on{background:#f5c518;color:#111}
+input,select{width:100%;padding:13px;border:1.5px solid #e2e8f0;border-radius:12px;margin-bottom:10px;font-size:15px;outline:none}input:focus,select:focus{border-color:#f5c518}
+.btn{width:100%;padding:13px;border:0;border-radius:12px;background:#f5c518;font-weight:700;font-size:16px;box-shadow:0 4px 14px #f5c51855}.btnG{background:#16a34a;color:#fff}.btnR{background:#dc2626;color:#fff}
+.row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px dashed #e2e8f0}.dot{width:14px;height:14px;border-radius:50%;display:inline-block}.green{background:#22c55e;box-shadow:0 0 10px #22c55e}.red{background:#ef4444;box-shadow:0 0 10px #ef4444}
+.hide{display:none}
+/* --- PREMIUM LOGIN --- */
+#loginWrap{min-height:100vh;background:radial-gradient(600px 300px at 50% -50px,#1e5a3a,transparent),#071e13;display:flex;align-items:center;justify-content:center;padding:18px}
+#login{width:100%;max-width:400px;background:#fff;color:#111;border-radius:22px;padding:26px 22px;box-shadow:0 20px 50px #0008;text-align:center;position:relative;overflow:hidden}
+#login:before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#f5c518,#16a34a,#f5c518)}
+#login .logo{width:68px;height:68px;background:#0f3d26;color:#f5c518;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 10px;box-shadow:0 6px 18px #0f3d2644}
+#login h2{margin:0;font-size:26px}#login p.sub{margin:6px 0 18px;color:#64748b;font-size:14px}
+#login label{display:block;text-align:left;font-size:13px;font-weight:700;margin:0 0 6px;color:#334155}
+.modal{position:fixed;inset:0;background:#000a;display:none;align-items:flex-end;justify-content:center}.modal>div{background:#fff;color:#111;width:100%;max-width:500px;max-height:85vh;overflow:auto;border-radius:18px 18px 0 0;padding:14px}
 </style></head><body>
-<header><h1>🕌 মশাউজান ইসলামী যুব সংঘ</h1><p>নগরকান্দা, ফরিদপুর • রানিং মাস: <b id="runMonth">নভেম্বর ২০২৬</b></p></header>
 
-<div id="login">
-<h2 style="text-align:center;margin:0">লগইন করুন</h2><p style="text-align:center;font-size:13px;color:#666">ভূমিকা বেছে পাসওয়ার্ড দিন</p>
-<select id="role"><option value="admin">এডমিন</option><option value="member">সদস্য</option><option value="president">সভাপতি - পিছনের তারিখ</option></select>
-<input id="pass" type="password" placeholder="পাসওয়ার্ড লিখুন">
-<button class="btn" onclick="doLogin()">প্রবেশ করুন</button>
-<p style="font-size:12px;color:#888;text-align:center">এডমিন: 9065.@mk • সদস্য: admin@123 • সভাপতি: masud@123</p>
-</div>
+<div id="loginWrap"><div id="login">
+<div class="logo">🕌</div>
+<h2>লগইন করুন</h2>
+<p class="sub">মশাউজান ইসলামী যুব সংঘ</p>
+<label>ভূমিকা বেছে নিন</label>
+<select id="role"><option value="admin">👑 এডমিন</option><option value="member">👤 সদস্য</option><option value="president">🕌 সভাপতি</option></select>
+<label>পাসওয়ার্ড</label>
+<input id="pass" type="password" placeholder="••••••••">
+<button class="btn" onclick="doLogin()">প্রবেশ করুন →</button>
+<p style="font-size:12px;color:#94a3b8;margin:14px 0 0">🔒 আপনার তথ্য সম্পূর্ণ নিরাপদ</p>
+</div></div>
 
-<div id="app" class="hide"><div class="wrap">
-<div style="display:flex;justify-content:space-between;align-items:center"><span id="who"></span><button onclick="location.reload()" style="padding:6px 12px;border-radius:8px;border:0;background:#fff;font-weight:700">লগআউট</button></div>
-
+<div id="app" class="hide">
+<header><h1>🕌 মশাউজান ইসলামী যুব সংঘ</h1><p>নগরকান্দা, ফরিদপুর • রানিং মাস: <b>নভেম্বর ২০২৬</b></p></header>
+<div class="wrap">
+<div style="display:flex;justify-content:space-between;align-items:center"><span id="who"></span><button onclick="location.reload()" style="padding:7px 14px;border-radius:10px;border:0;background:#fff;font-weight:700">লগআউট</button></div>
 <div class="cards">
 <div class="card" onclick="openDetail('memberIncome')"><span>সদস্য আয়</span><b id="cMember">৳1,249,979</b></div>
-<div class="card" onclick="openDetail('otherIncome')"><span>অন্যান্য আয়</span><b id="cOther">৳0</b></div>
+<div class="card" onclick="openDetail('otherIncome')"><span>অন্যান্য আয়</span><b>৳0</b></div>
 <div class="card" onclick="openDetail('totalExpense')"><span>মোট ব্যয়</span><b id="cExp">৳0</b></div>
-<div class="card" onclick="openDetail('bankInterest')"><span>ব্যাংক ইন্টারেস্ট</span><b id="cInt">৳0</b></div>
+<div class="card" onclick="openDetail('bankInterest')"><span>ব্যাংক ইন্টারেস্ট</span><b>৳0</b></div>
 <div class="card" onclick="openDetail('totalIncome')"><span>মোট আয়</span><b id="cTotal">৳1,249,979</b></div>
 <div class="card" onclick="openDetail('bankBalance')"><span>ব্যাংক ব্যালেন্স</span><b id="cBank">৳1,249,979</b></div>
 </div>
-
 <div class="tabs"><button onclick="showTab('paid',this)" class="on">🟢 জমা দিয়েছে</button><button onclick="showTab('due',this)">🔴 বাকি আছে</button><button onclick="showTab('balance',this)">📋 সবার ব্যালেন্স</button></div>
-
 <div class="box">
 <div id="adminBox"><h3 style="margin:0 0 10px">➕ নতুন জমা / সদস্য</h3>
 <input id="mName" placeholder="সদস্যের নাম"><input id="mAmt" type="number" placeholder="টাকা - যেমন 500"><input id="mNote" placeholder="কিসের টাকা? মাসিক চাঁদা / অনুদান">
 <select id="mMonth"><option>নভেম্বর ২০২৬ - রানিং মাস</option><option>অক্টোবর ২০২৬ - পিছনের মাস (সভাপতির অনুমতি লাগবে)</option><option>সেপ্টেম্বর ২০২৬ - পিছনের মাস</option></select>
 <button class="btn btnG" onclick="addPay()">✅ জমা নিন - সবুজ হবে</button>
-<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="flex:1" onclick="addExpense()">💸 খরচ যোগ</button><button class="btn" style="flex:1;background:#111;color:#fff" onclick="addMemberOnly()">👤 শুধু সদস্য যোগ</button></div>
+<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="flex:1" onclick="addExpense()">💸 খরচ যোগ</button><button class="btn" style="flex:1;background:#111;color:#fff" onclick="addMemberOnly()">👤 সদস্য যোগ</button></div>
 <p id="adminMsg" style="font-size:13px;color:#dc2626"></p></div>
-
 <div id="tabPaid"></div><div id="tabDue" class="hide"></div><div id="tabBalance" class="hide"></div>
 </div></div></div>
-
 <div class="modal" id="modal"><div><div style="display:flex;justify-content:space-between"><h3 id="modalTitle" style="margin:0"></h3><button onclick="closeModal()" style="border:0;background:#eee;padding:6px 12px;border-radius:8px">✕</button></div><div id="modalBody"></div></div></div>
-
 <script>
-let role=''; let unlocked=false;
-let members=JSON.parse(localStorage.getItem('m_members')||'null')||[
-{name:'মাসুদ খান',paid:5000,totalPaid:125000},{name:'রহিম মিয়া',paid:0,totalPaid:118000},{name:'করিম শেখ',paid:500,totalPaid:95000},{name:'আব্দুল্লাহ',paid:500,totalPaid:88000},{name:'সোহেল রানা',paid:0,totalPaid:76000}];
-let tx=JSON.parse(localStorage.getItem('m_tx')||'[]');
-let exps=JSON.parse(localStorage.getItem('m_exp')||'[]');
+let role='';let unlocked=false;
+let members=JSON.parse(localStorage.getItem('m_members')||'null')||[{name:'মাসুদ খান',paid:5000,totalPaid:125000},{name:'রহিম মিয়া',paid:0,totalPaid:118000},{name:'করিম শেখ',paid:500,totalPaid:95000},{name:'আব্দুল্লাহ',paid:500,totalPaid:88000},{name:'সোহেল রানা',paid:0,totalPaid:76000}];
+let tx=JSON.parse(localStorage.getItem('m_tx')||'[]');let exps=JSON.parse(localStorage.getItem('m_exp')||'[]');
 function save(){localStorage.setItem('m_members',JSON.stringify(members));localStorage.setItem('m_tx',JSON.stringify(tx));localStorage.setItem('m_exp',JSON.stringify(exps));render();}
 function doLogin(){let r=document.getElementById('role').value;let p=document.getElementById('pass').value;
 if(r=='admin'&&p=='9065.@mk'){role='admin';unlocked=true;}
 else if(r=='member'&&p=='admin@123'){role='member';}
 else if(r=='president'&&p=='masud@123'){role='president';unlocked=true;}
-else return alert('ভুল পাসওয়ার্ড!'); 
-document.getElementById('login').style.display='none';document.getElementById('app').classList.remove('hide');
-document.getElementById('who').innerText = r=='admin'?'👑 এডমিন মোড':r=='member'?'👤 সদস্য মোড (শুধু দেখা যাবে)':'🕌 সভাপতি মোড - পিছনের তারিখ খোলা';
+else return alert('ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।');
+document.getElementById('loginWrap').style.display='none';document.getElementById('app').classList.remove('hide');
+document.getElementById('who').innerText=r=='admin'?'👑 এডমিন মোড':r=='member'?'👤 সদস্য মোড (শুধু দেখা যাবে)':'🕌 সভাপতি মোড - পিছনের তারিখ খোলা';
 if(role=='member')document.getElementById('adminBox').style.display='none';render();}
 function showTab(id,b){['tabPaid','tabDue','tabBalance'].forEach(x=>document.getElementById(x).classList.add('hide'));document.getElementById('tab'+id.charAt(0).toUpperCase()+id.slice(1)).classList.remove('hide');document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');}
-function addMemberOnly(){let n=document.getElementById('mName').value.trim();if(!n)return alert('নাম লিখুন');if(role=='member')return alert('সদস্যরা যোগ করতে পারবে না');members.push({name:n,paid:0,totalPaid:0});save();alert('সদস্য যোগ হইছে');}
+function addMemberOnly(){let n=document.getElementById('mName').value.trim();if(!n)return alert('নাম লিখুন');members.push({name:n,paid:0,totalPaid:0});save();alert('সদস্য যোগ হইছে');}
 function addPay(){if(role=='member')return alert('সদস্যরা জমা নিতে পারবে না');
 let n=document.getElementById('mName').value.trim();let a=+document.getElementById('mAmt').value;let mo=document.getElementById('mMonth').value;
-if(mo.includes('পিছনের')&&!unlocked){document.getElementById('adminMsg').innerText='⚠️ পিছনের তারিখ খুলতে সভাপতির পাসওয়ার্ড (masud@123) দিয়ে লগইন করতে হবে।';return;}
-if(!n||!a)return alert('নাম আর টাকা লিখুন');
-let idx=members.findIndex(m=>m.name==n);if(idx<0){members.push({name:n,paid:0,totalPaid:0});idx=members.length-1;}
+if(mo.includes('পিছনের')&&!unlocked){document.getElementById('adminMsg').innerText='⚠️ পিছনের তারিখ খুলতে সভাপতির পাসওয়ার্ড দিয়ে লগইন করতে হবে।';return;}
+if(!n||!a)return alert('নাম আর টাকা লিখুন');let idx=members.findIndex(m=>m.name==n);if(idx<0){members.push({name:n,paid:0,totalPaid:0});idx=members.length-1;}
 members[idx].paid+=a;members[idx].totalPaid+=a;tx.push({name:n,amt:a,note:document.getElementById('mNote').value||'মাসিক চাঁদা',month:mo,date:new Date().toLocaleDateString('bn-BD')});save();alert('জমা হইছে - এখন সবুজ বাতি জ্বলবে 🟢');}
 function addExpense(){let n=prompt('কিসে খরচ?');let a=+prompt('কত টাকা?');if(!n||!a)return;exps.push({note:n,amt:a,date:new Date().toLocaleDateString('bn-BD')});save();}
-function render(){
-let paid=members.filter(m=>m.paid>0);let due=members.filter(m=>m.paid<=0);
+function render(){let paid=members.filter(m=>m.paid>0);let due=members.filter(m=>m.paid<=0);
 document.getElementById('tabPaid').innerHTML='<h3>🟢 রানিং মাসে জমা দিয়েছে - '+paid.length+' জন</h3>'+paid.map(m=>`<div class="row"><span><span class="dot green"></span> <b>${m.name}</b><br><span style="font-size:12px;color:#666">এই মাসে দিছে ${m.paid}৳</span></span><b style="color:#16a34a">${m.paid}৳ ✅</b></div>`).join('')||'কেউ জমা দেয় নাই';
-document.getElementById('tabDue').innerHTML='<h3 style="color:#dc2626">🔴 রানিং মাসে এখনো দেয় নাই - '+due.length+' জন - আলাদা তালিকা</h3>'+due.map(m=>`<div class="row" style="background:#fef2f2;border-radius:8px;padding:10px"><span><span class="dot red"></span> <b>${m.name}</b><br><span style="font-size:12px;color:#666">বাকি: 500৳ (চাঁদা)</span></span><b style="color:#dc2626">বাকি 🔴</b></div>`).join('')||'সবাই দিয়ে দিছে - আলহামদুলিল্লাহ!';
+document.getElementById('tabDue').innerHTML='<h3 style="color:#dc2626">🔴 রানিং মাসে এখনো দেয় নাই - '+due.length+' জন</h3>'+due.map(m=>`<div class="row" style="background:#fef2f2;border-radius:8px;padding:10px"><span><span class="dot red"></span> <b>${m.name}</b><br><span style="font-size:12px;color:#666">বাকি: 500৳ (চাঁদা)</span></span><b style="color:#dc2626">বাকি 🔴</b></div>`).join('')||'সবাই দিয়ে দিছে!';
 document.getElementById('tabBalance').innerHTML='<h3>📋 রানিং মাস পর্যন্ত সবার ব্যালেন্স</h3>'+members.map(m=>`<div class="row" onclick="openMember('${m.name}')"><span><span class="dot ${m.paid>0?'green':'red'}"></span> <b>${m.name}</b><br><span style="font-size:12px;color:#666">মোট জমা: ${m.totalPaid}৳ • এই মাস: ${m.paid}৳</span></span><b>${m.paid>0?'🟢 পেইড':'🔴 বাকি'} →</b></div>`).join('');
-let tot=tx.reduce((a,b)=>a+b.amt,0)+1249979; // আপনার ছবির 1,249,979 ধরে
-let expTot=exps.reduce((a,b)=>a+b.amt,0);
-document.getElementById('cMember').innerText='৳'+tot.toLocaleString('en-US');document.getElementById('cTotal').innerText='৳'+tot.toLocaleString('en-US');document.getElementById('cBank').innerText='৳'+(tot-expTot).toLocaleString('en-US');document.getElementById('cExp').innerText='৳'+expTot.toLocaleString('en-US');document.getElementById('cOther').innerText='৳0';
-}
+let tot=tx.reduce((a,b)=>a+b.amt,0)+1249979;let expTot=exps.reduce((a,b)=>a+b.amt,0);
+document.getElementById('cMember').innerText='৳'+tot.toLocaleString('en-US');document.getElementById('cTotal').innerText='৳'+tot.toLocaleString('en-US');document.getElementById('cBank').innerText='৳'+(tot-expTot).toLocaleString('en-US');document.getElementById('cExp').innerText='৳'+expTot.toLocaleString('en-US');}
 function openDetail(type){let t={memberIncome:'সদস্য আয় - বিস্তারিত',otherIncome:'অন্যান্য আয়',totalExpense:'মোট ব্যয় - বিস্তারিত',bankInterest:'ব্যাংক ইন্টারেস্ট',totalIncome:'মোট আয়',bankBalance:'ব্যাংক ব্যালেন্স'}[type];
 let body='';if(type=='memberIncome')body=members.map(m=>`<div class="row"><span>${m.name}</span><b>${m.totalPaid}৳</b></div>`).join('')+'<div class="row"><b>মোট</b><b>৳1,249,979</b></div>';
 if(type=='totalExpense')body=exps.map(e=>`<div class="row"><span>${e.note} - ${e.date}</span><b>${e.amt}৳</b></div>`).join('')||'এখনো কোনো খরচ নাই';
